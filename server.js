@@ -1,13 +1,30 @@
 const http = require("http");
+const { URLSearchParams } = require("url");
+
+const test = require("./method");
 
 const server = http.createServer((req, res) => {
   // Basic Client Information
+
   console.log("::Client Address : %s", req.socket.address().address);
   console.log("::Client Port : %s", req.socket.address().port);
 
   console.log("::Request Version : HTTP/%s", req.httpVersion);
   console.log("::Request Path : %s", req.url);
   console.log(":: Request Command : %s", req.method);
+
+  if (req.method === "GET") {
+    if (req.url.includes("?")) {
+      console.log("## GET response [Start] for Calculation");
+      var calculated = req.url.split("?");
+      calculated = calculated[1];
+
+      var result = test.method_for_get(calculated);
+      console.log(result);
+
+      console.log("## GET response [End] for Calculation");
+    }
+  }
 });
 
 server.listen(8080, (req, res) => {
