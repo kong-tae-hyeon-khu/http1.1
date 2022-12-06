@@ -35,6 +35,7 @@ const method_for_post = (request_body) => {
   console.log(
     `## POST request for calculation => ${var1} x ${var2} = ${result}`
   );
+  return `## POST request for calculation => ${var1} x ${var2} = ${result}`;
 };
 
 module.exports.basic_info = basic_info;

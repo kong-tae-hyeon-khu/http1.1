@@ -21,6 +21,9 @@ const server = http.createServer((req, res) => {
     } else if (req.url !== "/favicon.ico") {
       // Basic Client Request Information
       test.basic_info(req);
+      // Response
+      var result = `## HTTP Request GET for path ${req.url}`;
+      res.end(result);
     }
     // POST Method
   } else if (req.method === "POST") {
@@ -30,7 +33,8 @@ const server = http.createServer((req, res) => {
     request_body = "";
     req.on("data", (request_client) => {
       request_body += request_client;
-      test.method_for_post(request_body);
+      var a = test.method_for_post(request_body);
+      res.end(a);
     });
   }
 });
